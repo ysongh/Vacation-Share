@@ -1,12 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Box, Button, Typography } from '@material-ui/core';
+import { Paper, Grid, Box, Button, Typography } from '@material-ui/core';
 
 import heroBackground from '../assets/hero-background.png';
+import discover1 from '../assets/discover1.png';
 
 const useStyles = makeStyles(() => ({
     title: {
         marginTop: '2rem',
+    },
+    subTitle: {
+        marginTop: '1.5rem',
     },
     heroBackground:{
         height: '50vh',
@@ -32,6 +36,25 @@ const Home = () => {
                     </Button>
                 </Box>
             </Paper>
+
+            <Typography className={classes.subTitle} variant="h4" component="h2" gutterBottom>
+                Discover
+            </Typography>
+
+            <Grid container spacing={3}>
+                <Grid item xs={6} md={3}>
+                    <img src={discover1} alt="Lake"/>
+                </Grid>
+                <Grid item xs={6} md={3}>
+                    <img src={discover1} alt="Lake"/>
+                </Grid>
+                <Grid item xs={6} md={3}>
+                    <img src={discover1} alt="Lake"/>
+                </Grid>
+                <Grid item xs={6} md={3}>
+                    <img src={discover1} alt="Lake"/>
+                </Grid>
+            </Grid>
         </>
     );
 };

@@ -43,7 +43,7 @@ const Profile = () => {
                     <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
                         joedoe@example.com
                     </Typography>
-                    <Button component={Link} variant="contained" color="secondary" size="large">
+                    <Button component={Link} to="/create-event" variant="contained" color="secondary" size="large">
                         Add Event
                     </Button>
                 </Grid>

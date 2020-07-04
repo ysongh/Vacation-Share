@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import CreateEvent from './components/CreateEvent';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/profile" component={Profile} />
+      <Route exact path="/create-event" component={CreateEvent} />
     </BrowserRouter>
   );
 }

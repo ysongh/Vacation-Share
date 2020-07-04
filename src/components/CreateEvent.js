@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
 
+import {firebaseURL} from '../Config';
 import TextInputField from './common/TextInputField';
 
 const useStyles = makeStyles(() => ({
@@ -28,19 +30,23 @@ const CreateEvent = () => {
     const [location, setLocation] = useState("");
     const [size, setSize] = useState(1);
 
-    const onSubmit = () => {
-        const userInfo = {
-            name,
-            description,
-            date,
-            time,
-            location,
-            size
-        }
-    
-        console.log(userInfo);
+    const onSubmit = async () => {
+        try{
+            const userInfo = {
+                name,
+                description,
+                date,
+                time,
+                location,
+                size
+            }
+            
+            await axios.post(firebaseURL + '/events.json', userInfo);
 
-        history.push("/profile");
+            history.push("/profile");
+        } catch(err){
+            console.error(err);
+        }
       };
 
     return(

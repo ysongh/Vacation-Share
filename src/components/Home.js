@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Grid, Box, Button, Typography } from '@material-ui/core';
+import { Container, Paper, Grid, Box, Button, Typography } from '@material-ui/core';
 
 import heroBackground from '../assets/hero-background.png';
 import discover1 from '../assets/discover1.png';
@@ -38,24 +38,26 @@ const Home = () => {
                 </Box>
             </Paper>
 
-            <Typography className={classes.subTitle} variant="h4" component="h2" gutterBottom>
-                Discover
-            </Typography>
+            <Container>
+                <Typography className={classes.subTitle} variant="h4" component="h2" gutterBottom>
+                    Discover
+                </Typography>
 
-            <Grid container spacing={3}>
-                <Grid item xs={6} md={3}>
-                    <img src={discover1} alt="Lake"/>
+                <Grid container spacing={3}>
+                    <Grid item xs={6} md={3}>
+                        <img src={discover1} alt="Lake"/>
+                    </Grid>
+                    <Grid item xs={6} md={3}>
+                        <img src={discover1} alt="Lake"/>
+                    </Grid>
+                    <Grid item xs={6} md={3}>
+                        <img src={discover1} alt="Lake"/>
+                    </Grid>
+                    <Grid item xs={6} md={3}>
+                        <img src={discover1} alt="Lake"/>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6} md={3}>
-                    <img src={discover1} alt="Lake"/>
-                </Grid>
-                <Grid item xs={6} md={3}>
-                    <img src={discover1} alt="Lake"/>
-                </Grid>
-                <Grid item xs={6} md={3}>
-                    <img src={discover1} alt="Lake"/>
-                </Grid>
-            </Grid>
+            </Container>
         </>
     );
 };

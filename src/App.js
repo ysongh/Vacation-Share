@@ -1,13 +1,16 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom';
 
+import './App.css';
 import Home from './components/Home';
+import Register from './components/Register';
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <BrowserRouter className="App">
+      <Route exact path="/" component={Home} />
+      <Route exact path="/register" component={Register} />
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Grid, Box, Button, Typography } from '@material-ui/core';
 
@@ -31,7 +32,7 @@ const Home = () => {
                     Plan your dream vacation with your family and friends
                 </Typography>
                 <Box display="flex" justifyContent="center" mt="2rem">
-                    <Button variant="contained" color="primary" size="large">
+                    <Button component={Link} to="/register" variant="contained" color="primary" size="large">
                         Get Started
                     </Button>
                 </Box>

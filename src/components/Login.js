@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
@@ -19,6 +20,7 @@ const useStyles = makeStyles(() => ({
 
 const Login = () => {
     const classes = useStyles();
+    const history = useHistory();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -30,6 +32,8 @@ const Login = () => {
         }
     
         console.log(userInfo);
+
+        history.push("/profile");
       };
 
     return(

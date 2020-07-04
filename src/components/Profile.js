@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Avatar, Typography, Button } from '@material-ui/core';
 
+import { firebaseURL } from '../Config';
 import discover1 from '../assets/discover1.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +31,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = () => {
     const classes = useStyles();
+
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        async function getEvents() {
+            try{
+                const { data } = await axios.get(firebaseURL + '/events.json');
+                const eventsList = [];
+    
+                for (let key in data){
+                    eventsList.push({
+                        ...data[key],
+                        id: key
+                    });
+                }
+
+                setEvents(eventsList);
+                console.log(eventsList)
+            } catch(err){
+                console.error(err);
+            }
+        }
+
+        getEvents();
+    }, [""]);
 
     return(
         <Container>
@@ -62,36 +89,18 @@ const Profile = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell component="th" scope="row">
-                                        Fun Party
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Button variant="contained" color="primary" size="large">
-                                            See Detail
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell component="th" scope="row">
-                                        Fun Party
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Button variant="contained" color="primary" size="large">
-                                            See Detail
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell component="th" scope="row">
-                                        Fun Party
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Button variant="contained" color="primary" size="large">
-                                            See Detail
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
+                                {events.map((event) => (
+                                    <TableRow key={event.id}>
+                                        <TableCell component="th" scope="row">
+                                            {event.name}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Button variant="contained" color="primary" size="large">
+                                                See Detail
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                     </TableContainer>

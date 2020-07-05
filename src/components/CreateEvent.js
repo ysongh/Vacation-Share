@@ -52,7 +52,7 @@ const CreateEvent = () => {
         } catch(err){
             console.error(err);
         }
-      };
+    };
 
     return(
         <Grid className={classes.container} container justify="center">

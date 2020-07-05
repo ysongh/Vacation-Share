@@ -27,6 +27,8 @@ const EventDetail = () => {
     const classes = useStyles();
     const { id } =  useParams();
 
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
     const [event, setEvent] = useState({});
     const [open, setOpen] = React.useState(false);
 
@@ -51,6 +53,25 @@ const EventDetail = () => {
 
         getEvents();
     }, [""]);
+
+    const onSubmit = async () => {
+        try{
+            const taskInfo = {
+                name,
+                description,
+                type: 'Pending',
+                eventId: id
+            }
+            
+            await axios.post(firebaseURL + '/tasks.json', taskInfo);
+
+            setName("");
+            setDescription("");
+            setOpen(false);
+        } catch(err){
+            console.error(err);
+        }
+    };
 
     return(
         <Container>
@@ -108,15 +129,19 @@ const EventDetail = () => {
                     <TextInputField
                         label="Name"
                         name="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
                     <TextInputField
                         label="Description"
                         name="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </DialogContent>
 
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={() => onSubmit()} color="primary">
                         Add
                     </Button>
                     <Button onClick={handleClose} color="primary">

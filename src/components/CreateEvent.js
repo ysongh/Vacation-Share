@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardContent, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Typography, Button } from '@material-ui/core';
+import { Grid, Card, CardContent, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Typography, Button } from '@material-ui/core';
 
 import {firebaseURL} from '../Config';
 import TextInputField from './common/TextInputField';
@@ -75,20 +75,22 @@ const CreateEvent = () => {
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
-                            <TextInputField
-                                label=""
-                                name="date"
-                                type="date"
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                            />
-                            <TextInputField
-                                label=""
-                                name="time"
-                                type="time"
-                                value={time}
-                                onChange={(e) => setTime(e.target.value)}
-                            />
+                            <Box display="flex">
+                                <TextInputField
+                                    label=""
+                                    name="date"
+                                    type="date"
+                                    value={date}
+                                    onChange={(e) => setDate(e.target.value)}
+                                />
+                                <TextInputField
+                                    label=""
+                                    name="time"
+                                    type="time"
+                                    value={time}
+                                    onChange={(e) => setTime(e.target.value)}
+                                />
+                            </Box>
                             <TextInputField
                                 label="Location"
                                 name="location"
@@ -103,7 +105,7 @@ const CreateEvent = () => {
                                 onChange={(e) => setSize(e.target.value)}
                             />
                         </form>
-                        <Button onClick={() => onSubmit()} type="submit" variant="contained" color="primary">
+                        <Button onClick={() => onSubmit()} type="submit" variant="contained" color="primary" size="large">
                             Create
                         </Button>
                     </CardContent>

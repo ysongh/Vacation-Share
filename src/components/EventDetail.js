@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router";
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Paper, Card, Grid, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Typography } from '@material-ui/core';
+import { Container, Paper, Card, Grid, Box, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@material-ui/core';
 
 import { firebaseURL } from '../Config';
 import GuestList from './GuestList';
@@ -30,6 +30,7 @@ const EventDetail = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [event, setEvent] = useState({});
+    const [tasks, setTasks] = useState([]);
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -51,7 +52,28 @@ const EventDetail = () => {
             }
         }
 
+        async function getTasks() {
+            try{
+                const { data } = await axios.get(firebaseURL + '/tasks.json');
+                const tasksList = [];
+    
+                for (let key in data){
+                    if(data[key].eventId === id){
+                        tasksList.unshift({
+                            ...data[key],
+                            id: key
+                        });
+                    }
+                }
+
+                setTasks(tasksList);
+            } catch(err){
+                console.error(err);
+            }
+        }
+
         getEvents();
+        getTasks();
     }, [""]);
 
     const onSubmit = async () => {
@@ -64,6 +86,10 @@ const EventDetail = () => {
             }
             
             await axios.post(firebaseURL + '/tasks.json', taskInfo);
+
+            let temp = tasks;
+            temp.unshift(taskInfo);
+            setTasks(temp);
 
             setName("");
             setDescription("");
@@ -113,7 +139,7 @@ const EventDetail = () => {
                             Add
                         </Button>
                     </Box>
-                    <TaskList />
+                    <TaskList tasks={tasks} />
                 </Grid>
             </Grid>
 

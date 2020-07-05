@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
+import { Grid, Card, CardContent, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Typography, Button } from '@material-ui/core';
 
 import {firebaseURL} from '../Config';
 import TextInputField from './common/TextInputField';
@@ -21,7 +21,6 @@ const useStyles = makeStyles(() => ({
 
 const CreateEvent = () => {
     const classes = useStyles();
-    const history = useHistory();
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -29,6 +28,12 @@ const CreateEvent = () => {
     const [time, setTime] = useState("");
     const [location, setLocation] = useState("");
     const [size, setSize] = useState(1);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const onSubmit = async () => {
         try{
@@ -43,7 +48,7 @@ const CreateEvent = () => {
             
             await axios.post(firebaseURL + '/events.json', userInfo);
 
-            history.push("/profile");
+            setOpen(true);
         } catch(err){
             console.error(err);
         }
@@ -103,6 +108,34 @@ const CreateEvent = () => {
                         </Button>
                     </CardContent>
                 </Card>
+
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">Event Created</DialogTitle>
+
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Want to invite your family and friends? Enter their email to send invites.
+                        </DialogContentText>
+                        <TextInputField
+                            label="Email"
+                            name="email"
+                        />
+                    </DialogContent>
+
+                    <DialogActions>
+                        <Button component={Link} to="/profile" onClick={handleClose} color="primary">
+                            Send
+                        </Button>
+                        <Button component={Link} to="/profile" onClick={handleClose} color="primary">
+                            Back
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Grid>
         </Grid>
     );

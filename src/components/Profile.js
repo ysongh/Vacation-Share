@@ -41,7 +41,7 @@ const Profile = () => {
                 const eventsList = [];
     
                 for (let key in data){
-                    eventsList.push({
+                    eventsList.unshift({
                         ...data[key],
                         id: key
                     });

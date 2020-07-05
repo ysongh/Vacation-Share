@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    sideDrawer: {
+        minWidth: '15rem'
+    }
 }));
 
 const Navbar = () => {
@@ -38,7 +41,7 @@ const Navbar = () => {
                 </Container>
 
                 <Drawer anchor="right" open={open} onClick={() => setOpen(false)} onClose={() => setOpen(false)} onKeyDown={() => setOpen(false)}>
-                    <List component="nav">
+                    <List className={classes.sideDrawer} component="nav">
                         <ListItem button component={RouterLink} to="/">
                             <ListItemText primary="Home" />
                         </ListItem>

@@ -33,6 +33,7 @@ const Profile = () => {
     const classes = useStyles();
 
     const [events, setEvents] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         async function getEvents() {
@@ -53,7 +54,26 @@ const Profile = () => {
             }
         }
 
+        async function getTasks() {
+            try{
+                const { data } = await axios.get(firebaseURL + '/tasks.json');
+                const tasksList = [];
+    
+                for (let key in data){
+                    tasksList.unshift({
+                        ...data[key],
+                        id: key
+                    });
+                }
+
+                setTasks(tasksList);
+            } catch(err){
+                console.error(err);
+            }
+        }
+
         getEvents();
+        getTasks();
     }, [""]);
 
     return(
@@ -117,36 +137,18 @@ const Profile = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell component="th" scope="row">
-                                        Buy Soda
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Button variant="contained" color="primary" size="large">
-                                            See Detail
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell component="th" scope="row">
-                                        Buy Soda
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Button variant="contained" color="primary" size="large">
-                                            See Detail
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell component="th" scope="row">
-                                        Buy Soda
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Button variant="contained" color="primary" size="large">
-                                            See Detail
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
+                                {tasks.map((task) => (
+                                    <TableRow key={task.id}>
+                                        <TableCell component="th" scope="row">
+                                            {task.description}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Button component={Link} to={`/event/${task.eventId}`} variant="contained" color="primary" size="large">
+                                                See Event
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                     </TableContainer>

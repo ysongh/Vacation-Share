@@ -6,6 +6,7 @@ import { Container, Paper, Card, Grid, Typography } from '@material-ui/core';
 
 import { firebaseURL } from '../Config';
 import GuestList from './GuestList';
+import TaskList from './TaskList';
 import map from '../assets/map.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -70,6 +71,12 @@ const EventDetail = () => {
                         Guests
                     </Typography>
                     <GuestList />
+                </Grid>
+                <Grid className={classes.center} component={Card} item xs={12} sm={6}>
+                    <Typography className={classes.email} variant="h4" component="h2" gutterBottom>
+                        Tasks
+                    </Typography>
+                    <TaskList />
                 </Grid>
             </Grid>
             

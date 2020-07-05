@@ -5,6 +5,9 @@ import { Container, Paper, Grid, Box, Button, Typography } from '@material-ui/co
 
 import heroBackground from '../assets/hero-background.png';
 import discover1 from '../assets/discover1.png';
+import discover2 from '../assets/discover2.png';
+import discover3 from '../assets/discover3.png';
+import discover4 from '../assets/discover4.png';
 
 const useStyles = makeStyles(() => ({
     title: {
@@ -48,13 +51,13 @@ const Home = () => {
                         <img src={discover1} alt="Lake"/>
                     </Grid>
                     <Grid item xs={6} md={3}>
-                        <img src={discover1} alt="Lake"/>
+                        <img src={discover2} alt="Lake"/>
                     </Grid>
                     <Grid item xs={6} md={3}>
-                        <img src={discover1} alt="Lake"/>
+                        <img src={discover3} alt="Lake"/>
                     </Grid>
                     <Grid item xs={6} md={3}>
-                        <img src={discover1} alt="Lake"/>
+                        <img src={discover4} alt="Lake"/>
                     </Grid>
                 </Grid>
             </Container>

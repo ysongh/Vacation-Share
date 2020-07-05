@@ -48,7 +48,6 @@ const Profile = () => {
                 }
 
                 setEvents(eventsList);
-                console.log(eventsList)
             } catch(err){
                 console.error(err);
             }
@@ -95,7 +94,7 @@ const Profile = () => {
                                             {event.name}
                                         </TableCell>
                                         <TableCell align="right">
-                                            <Button variant="contained" color="primary" size="large">
+                                            <Button component={Link} to={`/event/${event.id}`} variant="contained" color="primary" size="large">
                                                 See Detail
                                             </Button>
                                         </TableCell>

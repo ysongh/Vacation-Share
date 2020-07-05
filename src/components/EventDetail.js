@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router";
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Paper, Card, Grid, Typography } from '@material-ui/core';
+import { Container, Paper, Card, Grid, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Typography } from '@material-ui/core';
 
 import { firebaseURL } from '../Config';
 import GuestList from './GuestList';
 import TaskList from './TaskList';
+import TextInputField from './common/TextInputField';
 import map from '../assets/map.png';
 
 const useStyles = makeStyles((theme) => ({
     header: {
         marginTop: '1rem'
     },
-    email: {
-        marginBottom: '1rem '
+    title: {
+        display: 'flex',
+        justifyContent: 'space-between'
     },
     guestList: {
         marginTop: '2.5rem'
@@ -26,6 +28,15 @@ const EventDetail = () => {
     const { id } =  useParams();
 
     const [event, setEvent] = useState({});
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         async function getEvents() {
@@ -72,13 +83,47 @@ const EventDetail = () => {
                     </Typography>
                     <GuestList />
                 </Grid>
-                <Grid className={classes.center} component={Card} item xs={12} sm={6}>
-                    <Typography className={classes.email} variant="h4" component="h2" gutterBottom>
-                        Tasks
-                    </Typography>
+                <Grid component={Card} item xs={12} sm={6}>
+                    <Box className={classes.title}>
+                        <Typography variant="h4" component="h2" gutterBottom>
+                            Tasks
+                        </Typography>
+                        <Button onClick={handleClickOpen} type="submit" variant="contained" color="primary">
+                            Add
+                        </Button>
+                    </Box>
                     <TaskList />
                 </Grid>
             </Grid>
+
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">Add Task</DialogTitle>
+
+                <DialogContent>
+                    <TextInputField
+                        label="Name"
+                        name="name"
+                    />
+                    <TextInputField
+                        label="Description"
+                        name="description"
+                    />
+                </DialogContent>
+
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Add
+                    </Button>
+                    <Button onClick={handleClose} color="primary">
+                        Back
+                    </Button>
+                </DialogActions>
+            </Dialog>
             
         </Container>
     );

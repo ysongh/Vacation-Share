@@ -6,7 +6,7 @@ import { Container, Grid, Paper, TableContainer, Table, TableHead, TableBody, Ta
 
 import { firebaseURL } from '../Config';
 import discover1 from '../assets/discover1.png';
-import { primaryColor } from '../config/color';
+import { primaryColor, secondaryColor } from '../config/color';
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -27,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
+    },
+    addBtn: {
+        backgroundColor: secondaryColor,
+        '&:hover': {
+            backgroundColor: secondaryColor,
+        }
     },
     eventBtn: {
         backgroundColor: primaryColor,
@@ -96,7 +102,7 @@ const Profile = () => {
                     <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
                         joedoe@example.com
                     </Typography>
-                    <Button component={Link} to="/create-event" variant="contained" color="secondary" size="large">
+                    <Button className={classes.addBtn} component={Link} to="/create-event" variant="contained" color="secondary" size="large">
                         Add Event
                     </Button>
                 </Grid>

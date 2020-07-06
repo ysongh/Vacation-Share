@@ -8,6 +8,7 @@ import discover1 from '../assets/discover1.png';
 import discover2 from '../assets/discover2.png';
 import discover3 from '../assets/discover3.png';
 import discover4 from '../assets/discover4.png';
+import { primaryColor } from '../config/color';
 
 const useStyles = makeStyles(() => ({
     title: {
@@ -23,6 +24,13 @@ const useStyles = makeStyles(() => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         padding: '3rem 2rem'
+    },
+    ctaBtn: {
+        backgroundColor: primaryColor,
+        '&:hover': {
+            backgroundColor: primaryColor,
+        },
+        color: 'white'
     }
 }));
 
@@ -35,7 +43,7 @@ const Home = () => {
                     Plan your dream vacation with your family and friends
                 </Typography>
                 <Box display="flex" justifyContent="center" mt="2rem">
-                    <Button component={Link} to="/register" variant="contained" color="primary" size="large">
+                    <Button className={classes.ctaBtn} component={Link} to="/register" variant="contained" size="large">
                         Get Started
                     </Button>
                 </Box>

@@ -9,6 +9,7 @@ import GuestList from './GuestList';
 import TaskList from './TaskList';
 import TextInputField from './common/TextInputField';
 import map from '../assets/map.png';
+import { primaryColor } from '../config/color';
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -20,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
     },
     guestList: {
         marginTop: '2.5rem'
+    },
+    addBtn: {
+        backgroundColor: primaryColor,
+        '&:hover': {
+            backgroundColor: primaryColor,
+        }
     }
 }));
 
@@ -135,7 +142,7 @@ const EventDetail = () => {
                         <Typography variant="h4" component="h2" gutterBottom>
                             Tasks
                         </Typography>
-                        <Button onClick={handleClickOpen} type="submit" variant="contained" color="primary">
+                        <Button className={classes.addBtn} onClick={handleClickOpen} type="submit" variant="contained" color="primary">
                             Add
                         </Button>
                     </Box>

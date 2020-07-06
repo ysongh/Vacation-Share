@@ -6,6 +6,7 @@ import { Container, Grid, Paper, TableContainer, Table, TableHead, TableBody, Ta
 
 import { firebaseURL } from '../Config';
 import discover1 from '../assets/discover1.png';
+import { primaryColor } from '../config/color';
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -26,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
+    },
+    eventBtn: {
+        backgroundColor: primaryColor,
+        '&:hover': {
+            backgroundColor: primaryColor,
+        }
     }
 }));
 
@@ -114,7 +121,7 @@ const Profile = () => {
                                             {event.name}
                                         </TableCell>
                                         <TableCell align="right">
-                                            <Button component={Link} to={`/event/${event.id}`} variant="contained" color="primary" size="large">
+                                            <Button className={classes.eventBtn} component={Link} to={`/event/${event.id}`} variant="contained" color="primary" size="large">
                                                 See Detail
                                             </Button>
                                         </TableCell>
@@ -143,7 +150,7 @@ const Profile = () => {
                                             {task.description}
                                         </TableCell>
                                         <TableCell align="right">
-                                            <Button component={Link} to={`/event/${task.eventId}`} variant="contained" color="primary" size="large">
+                                            <Button className={classes.eventBtn} component={Link} to={`/event/${task.eventId}`} variant="contained" color="primary" size="large">
                                                 See Event
                                             </Button>
                                         </TableCell>

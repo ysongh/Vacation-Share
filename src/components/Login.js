@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
 
 import TextInputField from './common/TextInputField';
+import { primaryColor } from '../config/color';
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -16,6 +17,12 @@ const useStyles = makeStyles(() => ({
     title: {
         marginTop: '1.5rem',
     },
+    submitBtn: {
+        backgroundColor: primaryColor,
+        '&:hover': {
+            backgroundColor: primaryColor,
+        }
+    }
 }));
 
 const Login = () => {
@@ -60,7 +67,7 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </form>
-                        <Button onClick={() => onSubmit()} type="submit" variant="contained" color="primary">
+                        <Button className={classes.submitBtn} onClick={() => onSubmit()} type="submit" variant="contained" color="primary" size="large">
                             Submit
                         </Button>
 

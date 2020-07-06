@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, AppBar, Drawer, Toolbar, IconButton, List, ListItem, ListItemText, Typography, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { primaryColor } from '../../config/color';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -16,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     },
     sideDrawer: {
         minWidth: '15rem'
+    },
+    appBar: {
+        backgroundColor: primaryColor
     }
 }));
 
@@ -26,7 +31,7 @@ const Navbar = () => {
 
     return(
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar className={classes.appBar} position="static">
                 <Container>
                     <Toolbar>
                     <Typography variant="h5" className={classes.title}>

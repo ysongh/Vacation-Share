@@ -6,6 +6,7 @@ import { Grid, Card, CardContent, Box, Dialog, DialogTitle, DialogContent, Dialo
 
 import {firebaseURL} from '../Config';
 import TextInputField from './common/TextInputField';
+import { primaryColor } from '../config/color';
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -17,6 +18,12 @@ const useStyles = makeStyles(() => ({
     title: {
         marginTop: '1.5rem',
     },
+    submitBtn: {
+        backgroundColor: primaryColor,
+        '&:hover': {
+            backgroundColor: primaryColor,
+        }
+    }
 }));
 
 const CreateEvent = () => {
@@ -105,7 +112,7 @@ const CreateEvent = () => {
                                 onChange={(e) => setSize(e.target.value)}
                             />
                         </form>
-                        <Button onClick={() => onSubmit()} type="submit" variant="contained" color="primary" size="large">
+                        <Button className={classes.submitBtn} onClick={() => onSubmit()} type="submit" variant="contained" color="primary" size="large">
                             Create
                         </Button>
                     </CardContent>

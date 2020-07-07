@@ -125,24 +125,32 @@ const EventDetail = () => {
                     <img src={map} alt="Map" />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h4" component="p" gutterBottom>
-                        {event.name}
-                    </Typography>
-                    <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
-                        {event.description}
-                    </Typography>
-                    <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
-                        {event.location}
-                    </Typography>
-                    <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
-                        {event.date} at {event.time}
-                    </Typography>
-                    <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
-                        by Joe Doe
-                    </Typography>
-                    <Button onClick={deleteEvent} type="submit" variant="contained" color="secondary">
-                        Remove
-                    </Button>
+                    { event ? (
+                        <>
+                            <Typography variant="h4" component="p" gutterBottom>
+                                {event.name}
+                            </Typography>
+                            <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
+                                {event.description}
+                            </Typography>
+                            <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
+                                {event.location}
+                            </Typography>
+                            <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
+                                {event.date} at {event.time}
+                            </Typography>
+                            <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
+                                by Joe Doe
+                            </Typography>
+                            <Button onClick={deleteEvent} type="submit" variant="contained" color="secondary">
+                                Remove
+                            </Button>
+                        </>
+                    ) : (
+                        <Typography className={classes.email} variant="h4" component="h1" gutterBottom>
+                            This Event does not exist
+                        </Typography>
+                    )}
                 </Grid>
             </Grid>
             <Grid className={classes.guestList} container spacing={4}>

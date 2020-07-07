@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router";
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Paper, Card, Grid, Box, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@material-ui/core';
 
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EventDetail = () => {
     const classes = useStyles();
+    const history = useHistory();
     const { id } =  useParams();
 
     const [name, setName] = useState("");
@@ -106,6 +108,16 @@ const EventDetail = () => {
         }
     };
 
+    const deleteEvent = async () => {
+        try{
+            await axios.delete(firebaseURL + '/events/' + id + '.json');
+
+            history.push("/profile");
+        } catch(err){
+            console.error(err);
+        }
+    };
+
     return(
         <Container>
             <Grid className={classes.header} component={Paper} container spacing={4}>
@@ -128,6 +140,9 @@ const EventDetail = () => {
                     <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
                         by Joe Doe
                     </Typography>
+                    <Button onClick={deleteEvent} type="submit" variant="contained" color="secondary">
+                        Remove
+                    </Button>
                 </Grid>
             </Grid>
             <Grid className={classes.guestList} container spacing={4}>

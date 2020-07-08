@@ -5,6 +5,7 @@ import { Container, AppBar, Drawer, Toolbar, IconButton, List, ListItem, ListIte
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { primaryColor } from '../../config/color';
+import Logo from '../../assets/logo.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
         backgroundColor: primaryColor
+    },
+    logo: {
+        width: '100px'
     }
 }));
 
@@ -36,7 +40,7 @@ const Navbar = () => {
                     <Toolbar>
                     <Typography variant="h5" className={classes.title}>
                         <Button component={RouterLink} to="/" color="inherit">
-                            Vacation Share
+                            <img className={classes.logo} src={Logo} alt="Logo" />
                         </Button>
                     </Typography>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => setOpen(true)}>
@@ -47,6 +51,9 @@ const Navbar = () => {
 
                 <Drawer anchor="right" open={open} onClick={() => setOpen(false)} onClose={() => setOpen(false)} onKeyDown={() => setOpen(false)}>
                     <List className={classes.sideDrawer} component="nav">
+                        <ListItem>
+                            <img className={classes.logo} src={Logo} alt="Logo" />
+                        </ListItem>
                         <ListItem button component={RouterLink} to="/">
                             <ListItemText primary="Home" />
                         </ListItem>

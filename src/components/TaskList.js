@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { List, ListItem, ListItemAvatar, ListItemText, Avatar } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, ListItemText, IconButton, Avatar } from '@material-ui/core';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(() => ({
     textLeft: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, deleteTask }) => {
     const classes = useStyles();
     return(
         <List className={classes.root}>
@@ -22,6 +23,9 @@ const TaskList = ({ tasks }) => {
                     </ListItemAvatar>
                     <ListItemText primary={task.name} secondary={task.description} />
                     <ListItemText className={classes.textLeft} edge="end" primary={task.type} />
+                    <IconButton edge="end" className={classes.menuButton} color="secondary" aria-label="delete" deleteTask={deleteTask()} >
+                        <DeleteIcon />
+                    </IconButton>
                 </ListItem>
             ))}
         </List>

@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import './App.css';
 import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/create-event" component={CreateEvent} />
       <Route exact path="/event/:id" component={EventDetail} />
+      <Footer />
     </BrowserRouter>
   );
 }

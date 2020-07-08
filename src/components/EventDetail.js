@@ -118,6 +118,15 @@ const EventDetail = () => {
         }
     };
 
+    const deleteTask = async (taskId) => {
+        try{
+            await axios.delete(firebaseURL + '/tasks/' + taskId + '.json');
+
+        } catch(err){
+            console.error(err);
+        }
+    };
+
     return(
         <Container>
             <Grid className={classes.header} component={Paper} container spacing={4}>
@@ -169,7 +178,7 @@ const EventDetail = () => {
                             Add
                         </Button>
                     </Box>
-                    <TaskList tasks={tasks} />
+                    <TaskList tasks={tasks} deleteTask={() => deleteTask(this)} />
                 </Grid>
             </Grid>
 

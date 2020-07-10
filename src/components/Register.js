@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 import TextInputField from './common/TextInputField';
 import { primaryColor } from '../config/color';
@@ -22,6 +23,9 @@ const useStyles = makeStyles(() => ({
         '&:hover': {
             backgroundColor: primaryColor,
         }
+    },
+    hr: {
+        marginTop: '1.2rem'
     }
 }));
 
@@ -55,6 +59,12 @@ const Register = () => {
                         <Typography variant="h5" paragraph>
                             Sign Up
                         </Typography>
+                        <Button variant="contained" color="inherit" size="large" fullWidth startIcon={<FacebookIcon />} >
+                            with Facebook
+                        </Button>
+
+                        <hr className={classes.hr} />
+
                         <form noValidate className={classes.form}>
                             <TextInputField
                                 label="First Name"

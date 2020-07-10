@@ -49,7 +49,7 @@ const Register = () => {
 
     return(
         <Grid className={classes.container} container justify="center">
-            <Grid item xs={12} sm={8} md={6}>
+            <Grid item xs={12} sm={7} md={4}>
                 <Card>
                     <CardContent>
                         <Typography variant="h5" paragraph>

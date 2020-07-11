@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +7,7 @@ import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 
 import TextInputField from './common/TextInputField';
+import { firebaseURL } from '../Config';
 import { primaryColor } from '../config/color';
 
 const useStyles = makeStyles(() => ({
@@ -36,16 +38,25 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const onSubmit = () => {
-        const userInfo = {
-            email,
-            password
-        }
-    
-        console.log(userInfo);
+    const onSubmit = async () => {
+        try{
+            const userInfo = {
+                email,
+                password
+            }
 
-        history.push("/profile");
-      };
+            const { data } = await axios.get(firebaseURL + '/users.json');
+    
+            for (let key in data){
+                if(data[key].email === email){
+                    history.push("/profile");
+                }
+            }
+
+        } catch(err){
+            console.error(err);
+        }
+    };
 
     return(
         <Grid className={classes.container} container justify="center">

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 
+import {firebaseURL} from '../Config';
 import TextInputField from './common/TextInputField';
 import { primaryColor } from '../config/color';
 
@@ -38,17 +40,21 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const onSubmit = () => {
-        const userInfo = {
-            firstName,
-            lastName,
-            email,
-            password
-        }
+    const onSubmit = async () => {
+        try{
+            const userInfo = {
+                firstName,
+                lastName,
+                email,
+                password
+            }
+        
+            await axios.post(firebaseURL + '/users.json', userInfo);
     
-        console.log(userInfo);
-
-        history.push("/profile");
+            history.push("/profile");
+        } catch(err){
+            console.error(err);
+        }
       };
 
     return(

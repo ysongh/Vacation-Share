@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 
+import { GlobalContext } from '../context/GlobalState';
 import {firebaseURL} from '../Config';
 import TextInputField from './common/TextInputField';
 import { primaryColor } from '../config/color';
@@ -32,6 +33,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Register = () => {
+    const { addUser } = useContext(GlobalContext);
     const classes = useStyles();
     const history = useHistory();
 
@@ -50,6 +52,8 @@ const Register = () => {
             }
         
             await axios.post(firebaseURL + '/users.json', userInfo);
+
+            addUser(userInfo);
     
             history.push("/profile");
         } catch(err){

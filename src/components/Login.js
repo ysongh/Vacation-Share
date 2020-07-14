@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 
+import { GlobalContext } from '../context/GlobalState';
 import TextInputField from './common/TextInputField';
 import { firebaseURL } from '../Config';
 import { primaryColor } from '../config/color';
@@ -32,6 +33,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Login = () => {
+    const { addUser } = useContext(GlobalContext);
     const classes = useStyles();
     const history = useHistory();
 
@@ -46,9 +48,15 @@ const Login = () => {
             }
 
             const { data } = await axios.get(firebaseURL + '/users.json');
-    
+
             for (let key in data){
                 if(data[key].email === email){
+                    const userData = {
+                        firstName: data[key].firstName,
+                        lastName: data[key].lastName,
+                        email: data[key].email,
+                    }
+                    addUser(userData);
                     history.push("/profile");
                 }
             }

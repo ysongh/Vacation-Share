@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Avatar, Typography, Button } from '@material-ui/core';
 
+import { GlobalContext } from '../context/GlobalState';
 import { firebaseURL } from '../Config';
 import discover1 from '../assets/discover1.png';
 import { primaryColor, secondaryColor } from '../config/color';
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = () => {
+    const { user } = useContext(GlobalContext);
     const classes = useStyles();
 
     const [events, setEvents] = useState([]);
@@ -97,10 +99,10 @@ const Profile = () => {
                 </Grid>
                 <Grid className={classes.center} item xs={12} sm={6}>
                     <Typography variant="h4" component="p" gutterBottom>
-                        Joe Doe
+                        {user.firstName} {user.lastName}
                     </Typography>
                     <Typography className={classes.email} variant="subtitle1" component="p" gutterBottom>
-                        joedoe@example.com
+                        {user.email}
                     </Typography>
                     <Button className={classes.addBtn} component={Link} to="/create-event" variant="contained" color="secondary" size="large">
                         Add Event

@@ -39,14 +39,10 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const onSubmit = async () => {
         try{
-            const userInfo = {
-                email,
-                password
-            }
-
             const { data } = await axios.get(firebaseURL + '/users.json');
 
             for (let key in data){
@@ -60,6 +56,8 @@ const Login = () => {
                     history.push("/profile");
                 }
             }
+
+            setError("Invalid email or password");
 
         } catch(err){
             console.error(err);
@@ -95,6 +93,9 @@ const Login = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            <Typography variant="p" color="secondary" paragraph>
+                                {error}
+                            </Typography>
                         </form>
                         <Button className={classes.submitBtn} onClick={() => onSubmit()} type="submit" variant="contained" color="primary" size="large">
                             Submit

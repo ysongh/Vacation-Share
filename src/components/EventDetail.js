@@ -40,7 +40,8 @@ const EventDetail = () => {
     const [description, setDescription] = useState("");
     const [event, setEvent] = useState({});
     const [tasks, setTasks] = useState([]);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [go] = useState(true);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -80,10 +81,9 @@ const EventDetail = () => {
                 console.error(err);
             }
         }
-
         getEvents();
         getTasks();
-    }, [""]);
+    }, [go]);
 
     const onSubmit = async () => {
         try{

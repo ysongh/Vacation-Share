@@ -49,6 +49,7 @@ const Profile = () => {
 
     const [events, setEvents] = useState([]);
     const [tasks, setTasks] = useState([]);
+    const [go] = useState(true);
 
     useEffect(() => {
         async function getEvents() {
@@ -86,10 +87,10 @@ const Profile = () => {
                 console.error(err);
             }
         }
-
+        
         getEvents();
         getTasks();
-    }, [""]);
+    }, [go]);
 
     return(
         <Container>

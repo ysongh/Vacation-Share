@@ -41,23 +41,29 @@ const Register = () => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const onSubmit = async () => {
-        try{
-            const userInfo = {
-                firstName,
-                lastName,
-                email,
-                password
-            }
-        
-            await axios.post(firebaseURL + '/users.json', userInfo);
+        if(!firstName || !lastName || !email || !password){
+            setError("Please fill out all the fields");
+        }
+        else{
+            try{
+                const userInfo = {
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                }
+            
+                await axios.post(firebaseURL + '/users.json', userInfo);
 
-            addUser(userInfo);
-    
-            history.push("/profile");
-        } catch(err){
-            console.error(err);
+                addUser(userInfo);
+        
+                history.push("/profile");
+            } catch(err){
+                console.error(err);
+            }
         }
     };
 
@@ -102,6 +108,9 @@ const Register = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            <Typography variant="subtitle1" color="secondary" paragraph>
+                                {error}
+                            </Typography>
                         </form>
                         <Button className={classes.submitBtn} onClick={() => onSubmit()} type="submit" variant="contained" color="primary" size="large">
                             Submit

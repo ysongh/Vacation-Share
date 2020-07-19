@@ -47,13 +47,15 @@ const Login = () => {
 
             for (let key in data){
                 if(data[key].email === email){
-                    const userData = {
-                        firstName: data[key].firstName,
-                        lastName: data[key].lastName,
-                        email: data[key].email,
+                    if(data[key].password === password){
+                        const userData = {
+                            firstName: data[key].firstName,
+                            lastName: data[key].lastName,
+                            email: data[key].email,
+                        }
+                        addUser(userData);
+                        history.push("/profile");
                     }
-                    addUser(userData);
-                    history.push("/profile");
                 }
             }
 
@@ -93,7 +95,7 @@ const Login = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <Typography variant="p" color="secondary" paragraph>
+                            <Typography variant="subtitle1" color="secondary" paragraph>
                                 {error}
                             </Typography>
                         </form>

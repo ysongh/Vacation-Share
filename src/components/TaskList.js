@@ -23,7 +23,7 @@ const TaskList = ({ tasks, deleteTask }) => {
                     </ListItemAvatar>
                     <ListItemText primary={task.name} secondary={task.description} />
                     <ListItemText className={classes.textLeft} edge="end" primary={task.type} />
-                    <IconButton edge="end" className={classes.menuButton} color="secondary" aria-label="delete" deleteTask={deleteTask()} >
+                    <IconButton edge="end" className={classes.menuButton} color="secondary" aria-label="delete" onClick={deleteTask} value={task.id} >
                         <DeleteIcon />
                     </IconButton>
                 </ListItem>

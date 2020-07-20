@@ -41,7 +41,7 @@ const EventDetail = () => {
     const [event, setEvent] = useState({});
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = useState(false);
-    const [go] = useState(true);
+    const [go, setGo] = useState(true);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -118,9 +118,12 @@ const EventDetail = () => {
         }
     };
 
-    const deleteTask = async (taskId) => {
+    const deleteTask = async e => {
+        const taskId = e.target.value;
+        
         try{
             await axios.delete(firebaseURL + '/tasks/' + taskId + '.json');
+            setGo(!go);
 
         } catch(err){
             console.error(err);
@@ -178,7 +181,7 @@ const EventDetail = () => {
                             Add
                         </Button>
                     </Box>
-                    <TaskList tasks={tasks} deleteTask={() => deleteTask(this)} />
+                    <TaskList tasks={tasks} deleteTask={(e) => deleteTask(e)} />
                 </Grid>
             </Grid>
 

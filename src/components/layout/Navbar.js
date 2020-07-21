@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = () => {
-    const { user } = useContext(GlobalContext);
+    const { user, logout } = useContext(GlobalContext);
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -62,6 +62,9 @@ const Navbar = () => {
             </ListItem>
             <ListItem button component={RouterLink} to="/profile">
                 <ListItemText primary="Profile" />
+            </ListItem>
+            <ListItem button component={RouterLink} to="/" onClick={() => logout()}>
+                <ListItemText primary="Logout" />
             </ListItem>
         </List>
     );

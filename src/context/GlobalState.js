@@ -17,9 +17,16 @@ export const GlobalProvider = ({ children }) => {
         })
     }
 
+    function logout(){
+        dispatch({
+            type: "LOGOUT"
+        })
+    }
+
     return (<GlobalContext.Provider value={{
         user: state.user,
-        addUser
+        addUser,
+        logout
     }}>
         {children}
     </GlobalContext.Provider>);

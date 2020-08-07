@@ -3,12 +3,14 @@ export default (state, action) => {
         case "ADD_USER":
             return{
                 ...state,
-                user: action.payload
+                user: action.payload,
+                isLoggin: true
             }
         case "LOGOUT":
             return{
                 ...state,
-                user: {}
+                user: {},
+                isLoggin: false
             }
         default:
             return state;

@@ -2,7 +2,8 @@ import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
 const inititalState = {
-    user: {}
+    user: {},
+    isLoggin: false
 }
 
 export const GlobalContext = createContext(inititalState);
@@ -25,6 +26,7 @@ export const GlobalProvider = ({ children }) => {
 
     return (<GlobalContext.Provider value={{
         user: state.user,
+        isLoggin: state.isLoggin,
         addUser,
         logout
     }}>

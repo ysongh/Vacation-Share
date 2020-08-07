@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Paper, Grid, Box, Button, Typography } from '@material-ui/core';
 
+import { GlobalContext } from '../context/GlobalState';
 import heroBackground from '../assets/hero-background.png';
 import discover1 from '../assets/discover1.png';
 import discover2 from '../assets/discover2.png';
@@ -35,6 +36,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Home = () => {
+    const { isLoggin } = useContext(GlobalContext);
     const classes = useStyles();
     return(
         <>
@@ -43,9 +45,15 @@ const Home = () => {
                     Plan your dream vacation with your family and friends
                 </Typography>
                 <Box display="flex" justifyContent="center" mt="2rem">
-                    <Button className={classes.ctaBtn} component={Link} to="/register" variant="contained" size="large">
-                        Get Started
-                    </Button>
+                    { isLoggin ? (
+                        <Button className={classes.ctaBtn} component={Link} to="/profile" variant="contained" size="large">
+                            Your Profile
+                        </Button>
+                    ) : (
+                        <Button className={classes.ctaBtn} component={Link} to="/register" variant="contained" size="large">
+                            Get Started
+                        </Button>
+                    )}
                 </Box>
             </Paper>
 

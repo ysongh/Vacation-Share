@@ -83,7 +83,7 @@ const EventDetail = () => {
         }
         getEvents();
         getTasks();
-    }, [go]);
+    }, [go, id]);
 
     const onSubmit = async () => {
         try{
